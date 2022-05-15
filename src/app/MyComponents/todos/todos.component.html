@@ -1,0 +1,28 @@
+<div class="container">
+    <h3 class="text-center mb-3">Todo List by <a href="https://www.youtube.com/c/learnoverflow"> Learn Overflow</a></h3>
+</div>
+
+<app-add-todo (todoAdd)="addTodo($event)"></app-add-todo>
+
+<h4>Your Pending Todo</h4>
+<div *ngIf="this.todos.length === 0; else elseBlock">No Pending Todos to Display</div>
+<ng-template #elseBlock>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Strike</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <div *ngFor="let todo of todos; index as i">
+                <tr>
+                    <app-todo-item [todo]="todo" [i]="i" (todoDelete)="deleteTodo($event)"
+                        (todoCheckBox)="toggleTodo($event)"></app-todo-item>
+                </tr>
+            </div>
+        </tbody>
+    </table>
+</ng-template>
